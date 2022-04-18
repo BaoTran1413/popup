@@ -1,0 +1,235 @@
+
+<h3> DEPARTMENT !!!</h3>
+<dx-button
+ stylingMode="outlined"
+  icon="inserttable"
+   type="success"
+ class="button-info"                      
+  (onClick)="create()" > </dx-button> 
+<!-- <table class="table table-striped">
+        <tr>  <th> ID</th>
+                  <th> Name </th>
+                  <th> Address</th>
+                  <th> Phone</th>
+                  <th> Website</th>
+                  <th> Scription</th>
+                  <th> <dx-button
+                        stylingMode="outlined"
+                        icon="inserttable"
+                        type="success"
+                        class="button-info"                      
+                        (onClick)="create()" > </dx-button>                      
+                </th>
+             </tr>  
+        <tr *ngFor="let department of departments">
+            <td> {{department.Id}}</td>
+            <td> {{department.Name}}</td>
+            <td> {{department.Address}}</td>
+            <td> {{department.Phone}}</td>
+            <td> {{department.Website}}</td>
+            <td> {{department.Scription}}</td>
+            <td> 
+                <dx-button
+                  stylingMode="contained"
+                  icon="card"
+                  type="success"
+                  class="button-info"                 
+                 (onClick)="show(department)" ></dx-button>
+                &nbsp;
+                 <dx-button
+                 stylingMode="outlined"
+                 icon="tableproperties"
+                 type="success"
+                 class="button-info"                
+                (onClick)="Edit(department)" ></dx-button>
+                &nbsp;
+                <dx-button
+                stylingMode="outlined"
+                icon="deleterow"
+                type="success"
+                class="button-info"                
+               (onClick)="delete(department)" ></dx-button>
+            </td>
+        </tr>
+</table> -->
+<!-- <div *ngFor = "let department of departments">
+<dx-button
+    stylingMode="contained"
+    icon="card"
+    type="success"
+    class="button-info"                 
+    (onClick)="show(department)" ></dx-button>
+&nbsp;
+<dx-button
+    stylingMode="outlined"
+    icon="tableproperties"
+    type="success"
+    text="edit"
+    class="button-info"                
+    (onClick)="Edit(department)" ></dx-button>
+
+&nbsp;
+    <dx-button
+    stylingMode="outlined"
+    icon="deleterow"
+    type="success"
+    class="button-info"                
+    (onClick)="delete(department)" ></dx-button>
+&nbsp;
+
+</div> -->
+
+
+
+<div id="data-grid-demo">
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="departments"
+    keyExpr="Id"
+    [showBorders]="true"   
+>
+    <dxo-editing [allowDeleting]="true"> </dxo-editing>  
+    <dxi-column type="buttons"  caption= "action" [width]="80" >     
+            <dxi-button
+                stylingMode="contained"
+                icon="card"
+                type="success"
+                class="button-info"                 
+                (onClick)="show" ></dxi-button>
+            &nbsp;
+            <dxi-button
+                stylingMode="outlined"
+                icon="tableproperties"
+                type="success"
+                text="edit"
+                class="button-info"                
+                (onClick)="edit" ></dxi-button>
+            
+            &nbsp;
+                <dxi-button
+                stylingMode="outlined"
+                icon="deleterow"
+                type="success"
+                class="button-info"                
+                (onClick)="delete" ></dxi-button>
+            &nbsp;
+    </dxi-column>
+    <dxi-column dataField="Name" caption="Name" [minWidth]="150" dataType="string"></dxi-column>
+    <dxi-column dataField="Address" caption="Address" [minWidth]="150" dataType="string"></dxi-column>
+    <dxi-column dataField="Phone" caption="Phone" [minWidth]="150" dataType="string"></dxi-column>
+    <dxi-column dataField="Website" caption="Website" [minWidth]="150" dataType="string"></dxi-column>
+    <dxi-column dataField="Scription" caption="Scription" [minWidth]="150" dataType="string"></dxi-column>   
+</dx-data-grid>
+</div>
+
+<!--Show  -->
+<dx-popup
+[width]="450"
+[height]="270"
+title="Information Department"
+[showTitle]="true"
+[closeOnOutsideClick]="true"
+[showCloseButton]="true"
+container=".dx-viewport"
+[(visible)]="visibleShow"
+>
+<p> @Name: <span> {{currentdeparment.Name  }} </span></p>
+<p> @Address:<span> {{currentdeparment.Address  }} </span></p>
+<p> @Phone:<span> {{currentdeparment.Phone  }} </span></p>
+<p> @Website:<span> {{currentdeparment.Website  }} </span></p>
+<p> @Scription:<span> {{currentdeparment.Scription  }} </span></p>
+<p> Notes: This is {{currentdeparment.Name}} in {{currentdeparment.Address}} </p>
+</dx-popup>
+<!----------------------------------------------------------Create -------------------------------------------------------------------------------------------->
+<dx-popup
+[width]="700"
+[height]="580"
+title="Create Department"
+[showTitle]="true"
+[closeOnOutsideClick]="true"
+[showCloseButton]="true"
+container=".dx-viewport"
+[(visible)]="visiblecreate"
+>
+<form action="your-action" (submit)="ChangeInfoDepartment()" style="height: 430px;" >
+    <dx-scroll-view width="100%" height="100%" >
+        <div >
+            <!-- Department Name -->
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label"> <h4> Name:</h4> </div>
+                    <div class="dx-field-value" >
+                        <dx-text-box [(value)]="name">
+                             <dx-validator>
+                                <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+                             </dx-validator>
+                        </dx-text-box>
+                    </div>
+                </div>
+            </div>
+            <!-- Department Address -->
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label"><h4> Address:   </h4></div>
+                    <div class="dx-field-value" >
+                        <dx-text-box [(value)]="address">
+                             <dx-validator>
+                                <dxi-validation-rule type="required" message="Address is required"></dxi-validation-rule>
+                             </dx-validator>
+                        </dx-text-box>
+                    </div>
+                </div>
+            </div>
+            <!-- Department phone -->
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label"><h4> phone:   </h4> </div>
+                    <div class="dx-field-value" >
+                        <dx-text-box [(value)]="phone">
+                             <dx-validator>
+                                <dxi-validation-rule type="required" message="phone is required"></dxi-validation-rule>
+                             </dx-validator>
+                        </dx-text-box>
+                    </div>
+                </div>
+            </div>
+            <!-- Department Website -->
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label"><h4>Website:    </h4> </div>
+                    <div class="dx-field-value" >
+                        <dx-text-box [(value)]="website">
+                             <dx-validator>
+                                <dxi-validation-rule type="required" message="Website is required"></dxi-validation-rule>
+                             </dx-validator>
+                        </dx-text-box>
+                    </div>
+                </div>
+            </div>
+            <!-- Department Scription -->
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                    <div class="dx-field-label"><h4> Scription:   </h4> </div>
+                    <div class="dx-field-value" >
+                        <dx-text-box [(value)]="scription">
+                             <dx-validator>
+                                <dxi-validation-rule type="required" message="Scription is required"></dxi-validation-rule>
+                             </dx-validator>
+                        </dx-text-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dx-scroll-view>
+    <div class="action" style="display:flex;justify-content: flex-end;">
+        <dx-button
+            stylingMode="contained"
+            icon="check"
+            type="success"
+            class="button-info"
+            text="Save"
+            (onClick)="save()" ></dx-button>
+    </div>
+</form>
+</dx-popup>
+<!-- --------------------------------------------------------------------------------Edit ------------------------------------------------------------>

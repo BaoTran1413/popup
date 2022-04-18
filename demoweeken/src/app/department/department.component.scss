@@ -1,0 +1,24 @@
+h3{
+    color:#86d854;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 16px 25px;
+    
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+table th{
+    color:#86d854;
+    font-size: 18px;
+    font-weight: bold;
+}
+table tr:hover{
+  background-color: lightgray;
+}
